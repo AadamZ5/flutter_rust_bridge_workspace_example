@@ -1,7 +1,7 @@
 # `flutter_rust_bridge_workspace` Example
 
 This example demonstrates using the `flutter_rust_bridge` within a Dart/Rust workspace,
-for [fzyzcjy/flutter_rust_bridge](https://github.com/fzyzcjy/flutter_rust_bridge)
+for [fzyzcjy/flutter_rust_bridge](https://github.com/fzyzcjy/flutter_rust_bridge) ([pull/2872](https://github.com/fzyzcjy/flutter_rust_bridge/pull/2872))
 
 ### Steps Taken to Create Example
 
@@ -9,10 +9,10 @@ _Note in these steps, you are free to adjust the name of the `apps` or `libs` fo
 
 - Manually create root `pubspec.yaml` with:
   ```yaml
-  name: flutter_rust_bridge_workspace
-  description: A new Flutter project.
+  name: flutter_rust_bridge_workspace # Put your own name here
+  description: A new Flutter project. # And your own description
   environment:
-    sdk: "^3.9.2"
+    sdk: "^3.9.2" # Workspaces require sdk >=3.6.0
   ```
 - Manually create root `Cargo.toml` and set `[workspace]` property `resolver = "2"` with:
   ```toml
@@ -21,7 +21,10 @@ _Note in these steps, you are free to adjust the name of the `apps` or `libs` fo
   ```
 - Create `apps` and `libs` folder
 - Generate flutter rust bridge app one with:
-  - `cd apps && flutter_rust_bridge_codegen create app_one --rust-crate-dir ../../libs/app_one_rust_lib --rust-crate-name app_one_rust_lib`
+  - ```shell
+    cd apps && \
+    flutter_rust_bridge_codegen create app_one --rust-crate-dir ../../libs/app_one_rust_lib --rust-crate-name app_one_rust_lib
+    ```
   - Update `apps/app_one/pubspec.yaml` and add `resolution: workspace`
   - Update root `Cargo.toml` and update the workspace section:
     ```toml
@@ -35,7 +38,10 @@ _Note in these steps, you are free to adjust the name of the `apps` or `libs` fo
       - apps/app_one
     ```
 - Generate flutter rust bridge app two with:
-  - `cd apps && flutter_rust_bridge_codegen create app_two --rust-crate-dir ../../libs/app_two_rust_lib --rust-crate-name app_two_rust_lib`
+  - ```shell
+    cd apps && \
+    flutter_rust_bridge_codegen create app_two --rust-crate-dir ../../libs/app_two_rust_lib --rust-crate-name app_two_rust_lib
+    ```
   - Update `apps/app_two/pubspec.yaml` and add `resolution: workspace`
   - Update root `Cargo.toml` and add workspace member `"libs/app_two_rust_lib"`
   - Update root `pubspec.yaml` add workspace member `apps/app_two`
@@ -51,7 +57,7 @@ checking will still be performed at the workspace root, if ran from a workspace.
 Ex, generating for `app_one` (applicable to `app_two`)
 
 ```sh
-cd apps/app_one
+cd apps/app_one && \
 flutter_rust_bridge_codegen generate
 ```
 
