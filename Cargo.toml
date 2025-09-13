@@ -1,0 +1,5 @@
+# Workspace cargo.toml
+
+[workspace]
+resolver = "2"
+members = ["libs/app_rust_one"]
