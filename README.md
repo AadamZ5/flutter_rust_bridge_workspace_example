@@ -52,5 +52,13 @@ Ex, generating for `app_one` (applicable to `app_two`)
 
 ```sh
 cd apps/app_one
-flutter_rust_bridge_codegen generate --rust-root ../../libs/app_one_rust_lib
+flutter_rust_bridge_codegen generate
 ```
+
+### More Detail
+
+In cases, dependencies are added based on what is required of the generated code. For example, generating enums requires the Dart `freezed` package (among others) to be installed
+for the closest representation of enums. The `apps/app_two` project includes enum in its exported output (via `libs/app_two_rust_lib`) to show the freezed package
+being correctly checked for in the app's `pubspec.yaml` and the repo root `pubspec.lock`.
+
+In the `apps/app_two` project, `build_runner 2.8.0` is failing during code generation. Downgrading to `<2.8.0` seems to allow generation to pass. TODO: Investigate this (open GH issue)

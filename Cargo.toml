@@ -2,4 +2,4 @@
 
 [workspace]
 resolver = "2"
-members = ["libs/app_rust_one"]
+members = ["libs/app_one_rust_lib", "libs/app_two_rust_lib"]

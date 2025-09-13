@@ -5,6 +5,39 @@
 
 import '../frb_generated.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
+import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
+part 'simple.freezed.dart';
 
 String greet({required String name}) =>
     RustLib.instance.api.crateApiSimpleGreet(name: name);
+
+MyComplexEnum giveMeAnEnum() =>
+    RustLib.instance.api.crateApiSimpleGiveMeAnEnum();
+
+@freezed
+sealed class MyComplexEnum with _$MyComplexEnum {
+  const MyComplexEnum._();
+
+  const factory MyComplexEnum.a() = MyComplexEnum_A;
+  const factory MyComplexEnum.b(int field0) = MyComplexEnum_B;
+  const factory MyComplexEnum.c({required String name}) = MyComplexEnum_C;
+  const factory MyComplexEnum.d(double field0, Point field1) = MyComplexEnum_D;
+}
+
+class Point {
+  final double x;
+  final double y;
+
+  const Point({required this.x, required this.y});
+
+  @override
+  int get hashCode => x.hashCode ^ y.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Point &&
+          runtimeType == other.runtimeType &&
+          x == other.x &&
+          y == other.y;
+}
